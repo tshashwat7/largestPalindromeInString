@@ -1,0 +1,32 @@
+// return yes/no if the the String passed contains largest palindrome with length in odd numbers. 
+
+function solution(S) {
+ var length = S.length;
+  var res = "";
+  var yesOrNo = "";
+  var palindromeInMiddle = function(left, right) {
+    while (left >= 0 && right < length && S[left] === S[right]) {
+      left--;
+      right++;
+    }
+    return S.slice(left + 1, right);
+  };
+
+  for (var i = 0; i < length - 1; i++) {
+    var oddPalindrome = palindromeInMiddle(i, i + 1);
+    var evenPalindrome = palindromeInMiddle(i, i);
+    if (oddPalindrome.length > res.length){
+        res = oddPalindrome;
+    }
+    if (evenPalindrome.length > res.length){
+      res = evenPalindrome;
+    }
+  }
+  if(res){
+      yesOrNo = "YES";
+  }else{
+      yesOrNo = "NO";
+  }
+  return yesOrNo;
+
+}
